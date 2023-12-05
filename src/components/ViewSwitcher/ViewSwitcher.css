@@ -1,0 +1,10 @@
+.viewSwitcher {
+  background: var(--base-secondary-color);
+  display: flex;
+  align-items: center;
+  color: var(--font-pale);
+}
+
+p {
+  margin: 0 1em;
+}

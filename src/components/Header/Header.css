@@ -1,0 +1,10 @@
+.header {
+  background: var(--base-secondary-color);
+  display: flex;
+  justify-content: space-between;
+  width: calc(100vw - 2em);
+  color: var(--font-pale);
+  padding: 0.5em 1em;
+  position: absolute;
+  bottom: 0;
+}
