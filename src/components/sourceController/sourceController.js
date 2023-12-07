@@ -91,7 +91,7 @@ const SourceController = () => {
               ref={refs.current[index] || (refs.current[index] = React.createRef())}
             >
               <p>{thisDeck.getName()}</p>
-              <FaPen id="options" onClick={openOptions} />
+              <FaEllipsisV id="options" onClick={openOptions} />
             </button>
           ))}
         </div>
@@ -132,17 +132,28 @@ const SourceController = () => {
         onAfterOpen={() => nameInput.current.focus()}
       >
         <form onSubmit={closeOptions}>
-          <input ref={nameInput} value={name} onChange={changeName} />
+          <input
+            className="tabNameInput"
+            key={name}
+            ref={nameInput}
+            value={name}
+            onChange={changeName}
+          />
 
-          <button type="submit" style={{ display: 'none' }}></button>
-          <button
-            onClick={() => {
-              deleteDeck();
-              closeOptions();
-            }}
-          >
-            Delete
-          </button>
+          <section>
+            <button type="submit" className="saveButton" id="optionsSave">
+              Save
+            </button>
+            <button
+              className="deleteButton"
+              onClick={() => {
+                deleteDeck();
+                closeOptions();
+              }}
+            >
+              Delete
+            </button>
+          </section>
         </form>
       </ModalComponent>
     </ModalComponent>
