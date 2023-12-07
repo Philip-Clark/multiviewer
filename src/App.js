@@ -44,7 +44,7 @@ function App() {
       parseInt(key) <= decks.length
     ) {
       let nextDeck = parseInt(key) - 1;
-      if (nextDeck === -1) nextDeck = 9;
+      if (nextDeck === -1 && decks.length >= 9) nextDeck = 9;
       setDeck(nextDeck);
     }
   };
