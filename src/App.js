@@ -12,7 +12,7 @@ export const ViewContext = React.createContext(null);
 function App() {
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
-  const [decks, setDecks] = useState([Deck('Tab 1', []), Deck('Deck 2', [])]);
+  const [decks, setDecks] = useState([Deck('Tab 1', []), Deck('Tab 2', [])]);
 
   const createNewDeck = () => {
     const newDeck = Deck(`Tab ${decks.length + 1}`, []);
