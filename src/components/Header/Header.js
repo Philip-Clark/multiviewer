@@ -2,17 +2,20 @@ import React, { useContext, useState } from 'react';
 import './Header.css';
 import ViewSwitcher from '../ViewSwitcher/ViewSwitcher';
 import { ViewContext } from '../../App';
-
+import { FaCog } from 'react-icons/fa';
 const Header = () => {
-  const { decks, deck, setColumns } = useContext(ViewContext);
-  setColumns(decks[deck].getColumns());
-  const changeNumber = (e) => {
-    decks[deck].setColumns(e.target.value);
+  const { controllerOpen, setControllerOpen } = useContext(ViewContext);
+
+  const toggleSourceController = () => {
+    setControllerOpen(!controllerOpen);
+    console.log(controllerOpen);
   };
+
   return (
     <div className="header">
       <ViewSwitcher />
-      <input type="number" value={decks[deck].getColumns()} onInput={changeNumber} />
+
+      <FaCog onClick={toggleSourceController} />
     </div>
   );
 };

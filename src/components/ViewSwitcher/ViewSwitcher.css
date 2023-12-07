@@ -5,6 +5,18 @@
   color: var(--font-pale);
 }
 
-p {
+.tabTitle {
   margin: 0 1em;
+  padding: 0;
+  width: 30ch;
+  text-align: center;
+  padding: 0.2em;
+  text-overflow: ellipsis;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--base-color);
+  color: white;
+  box-sizing: border-box;
+  transition: outline ease 0.2s;
+  outline: solid transparent;
 }

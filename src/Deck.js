@@ -1,7 +1,6 @@
 const ThawedDeck = (_name = '', _views = []) => {
   let name = _name;
   let views = _views;
-  let columns = 2;
 
   const setName = (newName) => {
     name = newName;
@@ -17,19 +16,22 @@ const ThawedDeck = (_name = '', _views = []) => {
     return views;
   };
 
+  const addView = (view) => {
+    views.push(view);
+    return views;
+  };
+  const removeView = (index) => {
+    console.log(index);
+    console.log(views[index]);
+    views.splice(index, 1);
+    return views;
+  };
+
   const getViews = () => {
     return views;
   };
 
-  const setColumns = (_columns) => {
-    columns = _columns;
-    return columns;
-  };
-  const getColumns = () => {
-    return columns;
-  };
-
-  return { setName, getName, setViews, getViews, getColumns, setColumns };
+  return { setName, getName, setViews, getViews, addView, removeView };
 };
 
 const Deck = Object.freeze(ThawedDeck);

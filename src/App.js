@@ -5,41 +5,32 @@ import React, { useState, useEffect } from 'react';
 import './theme.css';
 import './App.css';
 import Embed from './components/Embed/Embed';
-export const ViewContext = React.createContext(null);
+import SourceController from './components/sourceController/sourceController';
 
-const testView1 = View(
-  'First View',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/SY5pK3lCl4A?si=Z9v-h8QMLYx5k1EZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-);
-const testView2 = View(
-  'Second View',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/4xDzrJKXOOY?si=2Vz_JpPrQn5--DMf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-);
+export const ViewContext = React.createContext(null);
 
 function App() {
   const [deck, setDeck] = useState(0);
-  const [columns, setColumns] = useState(2);
-  const [decks, setDecks] = useState([
-    Deck('Deck 1', [
-      testView1,
-      testView2,
-      testView1,
-      testView2,
-      testView2,
-      testView1,
-      testView2,
-      testView1,
-      testView1,
-      testView1,
-      testView1,
-      testView1,
-      testView1,
-      testView1,
-      testView1,
-      testView1,
-    ]),
-    Deck('Deck 2', [testView1, testView2, testView1, testView2]),
-  ]);
+  const [controllerOpen, setControllerOpen] = useState(false);
+  const [decks, setDecks] = useState([Deck('Tab 1', []), Deck('Deck 2', [])]);
+
+  const createNewDeck = () => {
+    const newDeck = Deck(`Tab ${decks.length + 1}`, []);
+    setDecks((prevDecks) => [...prevDecks, newDeck]);
+    setDeck(decks.length);
+  };
+  const deleteDeck = () => {
+    setDecks((prevDecks) => {
+      const newDecks = [...prevDecks];
+      newDecks.splice(deck, 1);
+      return newDecks;
+    });
+    if (deck === 0) {
+      setDeck(0);
+      setDecks([Deck(`Tab 1`, [])]);
+    } else setDeck(deck - 1);
+  };
+
   return (
     <div className="App">
       <ViewContext.Provider
@@ -48,16 +39,21 @@ function App() {
           setDecks,
           decks,
           setDeck,
-          columns,
-          setColumns,
+          controllerOpen,
+          setControllerOpen,
+          createNewDeck,
+          deleteDeck, // Pass the function to context so it can be used in child components
         }}
       >
         <Header />
         <div className="grid">
-          {decks[deck].getViews().map((view) => {
-            return <Embed iframe={view.getIFrame()} title={view.getTitle()} />;
-          })}
+          {decks.length > 0 &&
+            decks[deck].getViews().map((view) => {
+              return <Embed iframe={view.getIFrame()} title={view.getTitle()} />;
+            })}
         </div>
+
+        <SourceController />
       </ViewContext.Provider>
     </div>
   );

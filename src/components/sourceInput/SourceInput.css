@@ -1,0 +1,60 @@
+.sourceInput {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 3fr 0.2fr;
+}
+
+/* .iframe should take 60% of the flex area, .name should take 30% leave 10px gap */
+.iFrame {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--base-secondary-color);
+  color: white;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: outline ease 0.2s;
+  outline: solid transparent;
+  text-overflow: ellipsis;
+}
+
+.iFrame:focus,
+.name:focus {
+  outline: solid var(--accent-color) !important;
+}
+
+.name {
+  padding: 10px;
+  text-overflow: ellipsis;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--base-secondary-color);
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: outline ease 0.2s;
+  outline: solid transparent;
+}
+
+.add,
+.delete {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--base-secondary-color);
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 900;
+  cursor: pointer;
+  transition: outline ease 0.2s;
+  outline: solid transparent;
+}
+
+.add:focus,
+.delete:focus,
+.add:hover,
+.delete:hover {
+  outline: solid var(--accent-color);
+}

@@ -3,7 +3,7 @@ iframe {
   border: none;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: content;
+  flex-basis: 50px;
 }
 .view {
   flex-basis: content;
@@ -11,10 +11,13 @@ iframe {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  border: solid grey 1px;
+  border: solid rgb(38, 38, 38) 1px;
+  position: relative;
 }
 
 #title {
-  margin: 5px;
+  padding: 2px 10px;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.533);
   position: absolute;
 }

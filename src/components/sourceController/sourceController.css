@@ -1,0 +1,146 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--base-color);
+  width: 400px;
+  padding: 20px;
+  padding-right: 0px;
+  width: 30%;
+  height: 60%;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.modal h1 {
+  margin: 0;
+}
+
+/* save button with rounded border, white text, and color of --accent-color */
+.saveButton {
+  border-radius: 4px;
+  color: white;
+  padding: 0.5em 4em;
+  background-color: var(--accent-color);
+  font-size: 0.8em;
+  font-weight: 100;
+  border: none;
+  cursor: pointer;
+  flex-grow: 1;
+  height: 100%;
+}
+
+/* cancelButton with no background color, no border, and white text */
+.cancelButton {
+  border-radius: 4px;
+  color: white;
+  border: solid var(--accent-color) 1px;
+  color: var(--accent-color);
+
+  padding: 0.5em 1em;
+  background-color: var(--base-color);
+  font-size: 0.8em;
+  font-weight: 100;
+  cursor: pointer;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.addView {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: content;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 10px;
+  height: max-content;
+  margin-right: 20px;
+  padding-bottom: 10px;
+  border-bottom: solid #777777 1px;
+  margin-bottom: 0;
+}
+
+.viewList {
+  scrollbar-color: var(--base-secondary-color);
+  scrollbar-width: 5px;
+  display: flex;
+  flex-shrink: 1;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  margin-right: 10px;
+  padding-right: 5px;
+}
+
+.viewList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.viewList::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.viewList::-webkit-scrollbar-thumb {
+  background-color: var(--base-secondary-color);
+  border-radius: 100px;
+}
+
+.modalInput {
+  background-color: var(--base-secondary-color);
+  font-size: 1.5em;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  padding: 0.25em 0em;
+  width: 100%;
+}
+
+.tabControls {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-right: 20px;
+}
+
+.modalInput:focus {
+  outline: solid var(--accent-color) !important;
+}
+
+.buttons {
+  display: flex;
+  flex-grow: 1;
+  gap: 5px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: stretch;
+  margin-right: 5px;
+}
+
+.labels {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 3fr;
+  margin-right: 20px;
+}
+
+.labels > p {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0px 5px;
+  font-weight: 400;
+}
