@@ -1,21 +1,86 @@
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--base-color);
-  width: 400px;
-  padding: 20px;
-  padding-right: 0px;
-  width: 30%;
-  height: 60%;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.tabsRow {
   display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  align-items: stretch;
+  align-items: center;
+  gap: 15px;
+  margin-right: 20px;
+}
+
+.optionsDropdown {
+  position: absolute;
+}
+
+.tabs::-webkit-scrollbar {
+  height: 10px; /* Set the width of the scrollbar */
+  background-color: var(--base-color); /* Set the background color of the scrollbar */
+}
+
+.tabs::-webkit-scrollbar-thumb {
+  background-color: var(--base-secondary-color); /* Set the color of the scrollbar thumb */
+  border-radius: 0; /* Set the border radius of the scrollbar thumb */
+}
+
+.tabs::-webkit-scrollbar-track {
+  background-color: var(--base-color); /* Set the background color of the scrollbar track */
+}
+.Plus {
+  height: 30px;
+  width: 30px;
+}
+.tabs {
+  display: flex;
+  overflow-x: scroll;
+  border-radius: 10px;
+  margin: 0;
+  background-color: #232323;
+  scrollbar-width: thin;
+  text-overflow: ellipsis;
+}
+.TabButton {
+  position: relative;
+  width: 70px;
+  border-radius: 10px;
+  text-overflow: ellipsis;
+  background-color: transparent;
+  color: white;
+  border: none;
+  opacity: 0.2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
   gap: 10px;
+}
+
+.TabButton > p {
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+
+#options {
+  opacity: 0;
+  display: none;
+}
+
+#optionsModal.modal {
+  height: 300px;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.TabButton.selected {
+  opacity: 1;
+  width: fit-content;
+  background-color: #515151;
+}
+
+.TabButton.selected > #options {
+  display: block;
+  opacity: 1;
 }
 
 .modal h1 {
@@ -26,30 +91,26 @@
 .saveButton {
   border-radius: 4px;
   color: white;
-  padding: 0.5em 4em;
+  padding: 0.25em 4em;
   background-color: var(--accent-color);
+  border: none;
+  margin: 10px;
   font-size: 0.8em;
   font-weight: 100;
-  border: none;
   cursor: pointer;
-  flex-grow: 1;
-  height: 100%;
 }
 
 /* cancelButton with no background color, no border, and white text */
 .cancelButton {
   border-radius: 4px;
   color: white;
-  border: solid var(--accent-color) 1px;
-  color: var(--accent-color);
-
-  padding: 0.5em 1em;
+  padding: 0.25em 1em;
   background-color: var(--base-color);
+  border: none;
+  margin: 10px;
   font-size: 0.8em;
   font-weight: 100;
   cursor: pointer;
-  height: 100%;
-  flex-grow: 1;
 }
 
 .addView {
@@ -64,13 +125,13 @@
   height: max-content;
   margin-right: 20px;
   padding-bottom: 10px;
-  border-bottom: solid #777777 1px;
   margin-bottom: 0;
 }
 
 .viewList {
   scrollbar-color: var(--base-secondary-color);
   scrollbar-width: 5px;
+  padding: 5px;
   display: flex;
   flex-shrink: 1;
   flex-direction: column;
@@ -81,6 +142,8 @@
   height: 100%;
   overflow-y: scroll;
   margin-right: 10px;
+  padding: 0;
+
   padding-right: 5px;
 }
 
@@ -97,37 +160,14 @@
   border-radius: 100px;
 }
 
-.modalInput {
-  background-color: var(--base-secondary-color);
-  font-size: 1.5em;
-  color: white;
-  text-align: center;
-  border: none;
-  border-radius: 10px;
-  padding: 0.25em 0em;
-  width: 100%;
-}
-
-.tabControls {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-right: 20px;
-}
-
-.modalInput:focus {
-  outline: solid var(--accent-color) !important;
-}
-
 .buttons {
   display: flex;
   flex-grow: 1;
-  gap: 5px;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
-  justify-content: space-evenly;
-  align-items: stretch;
+  justify-content: flex-end;
+  align-items: flex-end;
   margin-right: 5px;
 }
 
@@ -143,4 +183,5 @@
   box-sizing: border-box;
   padding: 0px 5px;
   font-weight: 400;
+  font-size: 0.8em;
 }

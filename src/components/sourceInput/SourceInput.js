@@ -47,11 +47,11 @@ const SourceInput = ({ view, addView, deleteView, id }) => {
 
       {addView ? (
         <button className="add" type="submit" onClick={handleSubmit}>
-          <FaPlus color="#777777" size="small" />
+          <FaPlus color="#2f2f2f" />
         </button>
       ) : (
         <button className="delete" type="delete" onClick={handleDelete}>
-          <FaMinus color="#777777" size="small" />
+          <FaMinus color="#2f2f2f" />
         </button>
       )}
     </form>

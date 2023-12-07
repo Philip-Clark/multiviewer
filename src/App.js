@@ -8,16 +8,57 @@ import Embed from './components/Embed/Embed';
 import SourceController from './components/sourceController/sourceController';
 
 export const ViewContext = React.createContext(null);
-
+const one = View(
+  'christmas Jazz',
+  '<iframe width="560" height="315" src="https://www.youtube.com/embed/JM-2nzSf7Q0?si=1hFQ6i7R9abz3Nwo&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+);
+const two = View(
+  'Synth Wave',
+  '<iframe width="560" height="315" src="https://www.youtube.com/embed/UedTcufyrHc?si=tGpQdaCAUeeSyG7B&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+);
+const three = View(
+  'Work Jazz',
+  '<iframe width="560" height="315" src="https://www.youtube.com/embed/S0zv1GMBRtE?si=STkdNHpAYJ_Xy9GO&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+);
+const four = View(
+  'Lofi Girl',
+  '<iframe width="560" height="315" src="https://www.youtube.com/embed/jfKfPfyJRdk?si=XGHUZEDUFsi8Oi_d&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+);
 function App() {
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
-  const [decks, setDecks] = useState([Deck('Tab 1', []), Deck('Tab 2', [])]);
+  const [decks, setDecks] = useState([
+    Deck('Tab 1', [one, two, three, four]),
+    Deck('Tab 2', [three, two]),
+  ]);
 
+  const handleKeyDown = (e) => {
+    const key = e.key;
+    if (key === '`') setControllerOpen(true);
+    if (key === 'ArrowLeft' && deck > 0) setDeck(deck - 1);
+    if (key === 'ArrowRight' && deck < decks.length - 1) setDeck(deck + 1);
+    if (
+      e.target.tagName !== 'INPUT' &&
+      !isNaN(key) &&
+      parseInt(key) >= 0 &&
+      parseInt(key) <= decks.length
+    ) {
+      let nextDeck = parseInt(key) - 1;
+      if (nextDeck === -1) nextDeck = 9;
+      setDeck(nextDeck);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [decks, deck]);
   const createNewDeck = () => {
     const newDeck = Deck(`Tab ${decks.length + 1}`, []);
     setDecks((prevDecks) => [...prevDecks, newDeck]);
     setDeck(decks.length);
+    return newDeck;
   };
   const deleteDeck = () => {
     setDecks((prevDecks) => {
@@ -25,10 +66,10 @@ function App() {
       newDecks.splice(deck, 1);
       return newDecks;
     });
-    if (deck === 0) {
+    if (decks.length === 1) {
       setDeck(0);
       setDecks([Deck(`Tab 1`, [])]);
-    } else setDeck(deck - 1);
+    } else setDeck(deck === 0 ? deck : deck - 1);
   };
 
   return (

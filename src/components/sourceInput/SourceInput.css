@@ -9,7 +9,6 @@
   border: none;
   border-radius: 10px;
   background-color: var(--base-secondary-color);
-  color: white;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -19,8 +18,21 @@
 }
 
 .iFrame:focus,
+.name:focus,
+.iFrame:hover,
+.name:hover {
+  color: white;
+  transition: outline ease 0s;
+}
+
+.iFrame:focus,
 .name:focus {
   outline: solid var(--accent-color) !important;
+}
+
+.iFrame,
+.name {
+  color: grey;
 }
 
 .name {
@@ -29,7 +41,6 @@
   border: none;
   border-radius: 10px;
   background-color: var(--base-secondary-color);
-  color: white;
   width: 100%;
   box-sizing: border-box;
   transition: outline ease 0.2s;
@@ -40,7 +51,7 @@
 .delete {
   border: none;
   border-radius: 10px;
-  background-color: var(--base-secondary-color);
+  background-color: transparent;
   color: white;
   width: 100%;
   box-sizing: border-box;
@@ -53,8 +64,6 @@
 }
 
 .add:focus,
-.delete:focus,
-.add:hover,
-.delete:hover {
+.delete:focus {
   outline: solid var(--accent-color);
 }

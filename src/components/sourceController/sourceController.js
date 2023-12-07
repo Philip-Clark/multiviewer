@@ -1,18 +1,41 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Modal from 'react-modal';
+import React, { useContext, useRef, useEffect, useState } from 'react';
 import { ViewContext } from '../../App';
 import './sourceController.css';
 import SourceInput from '../sourceInput/SourceInput';
 import View from '../../View';
 import _ from 'lodash';
-import Deck from '../../Deck';
+import { FaEllipsisV, FaPen, FaPlus } from 'react-icons/fa';
+import ModalComponent from '../modal/ModalComponent';
 
 const SourceController = () => {
   // get current deck from viewContext
-  const { decks, deck, setDecks, controllerOpen, setControllerOpen, deleteDeck, createNewDeck } =
-    useContext(ViewContext);
+  const {
+    decks,
+    setDeck,
+    deck,
+    setDecks,
+    controllerOpen,
+    setControllerOpen,
+    deleteDeck,
+    createNewDeck,
+  } = useContext(ViewContext);
+
   const [changedViews, setChangedViews] = useState(0);
   const [name, setName] = useState(decks[deck].getName());
+  const refs = useRef(decks.map(() => null));
+  const nameInput = useRef(null);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+
+  const selectDeck = (index) => {
+    setDeck(index);
+    console.log({ refs });
+    const scrollOptions = {
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+    };
+    refs.current[index].current.scrollIntoView(scrollOptions);
+  };
 
   const closeModal = () => {
     setControllerOpen(false);
@@ -28,37 +51,59 @@ const SourceController = () => {
     setChangedViews(changedViews + 1);
   };
 
+  const closeOptions = () => {
+    setOptionsOpen(false);
+  };
+
+  const openOptions = () => {
+    setName(decks[deck].getName());
+    setOptionsOpen(true);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Delete' && optionsOpen) {
+      deleteDeck();
+      closeOptions();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const changeName = (e) => {
     setName(e.target.value);
     decks[deck].setName(e.target.value);
   };
 
   return (
-    <Modal
-      isOpen={controllerOpen}
-      onRequestClose={closeModal}
-      className={'modal'}
-      style={{
-        overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.50)', // This is an example of a semi-transparent black color
-        },
-      }}
-    >
-      <div className="tabControls">
-        <input
-          type="text"
-          className="modalInput"
-          value={decks[deck].getName()}
-          onChange={changeName}
-        />
-        <div className="buttons">
-          <button className="cancelButton" onClick={deleteDeck}>
-            Delete Tab
-          </button>
-          <button className="saveButton" onClick={createNewDeck}>
-            New Tab
-          </button>
+    <ModalComponent closeModal={closeModal} controllerOpen={controllerOpen}>
+      <div className="tabsRow">
+        <div className="tabs">
+          {decks.map((thisDeck, index) => (
+            <button
+              className={`TabButton ${deck === index ? 'selected' : ''}`}
+              key={index}
+              onClick={() => selectDeck(index)}
+              ref={refs.current[index] || (refs.current[index] = React.createRef())}
+            >
+              <p>{thisDeck.getName()}</p>
+              <FaPen id="options" onClick={openOptions} />
+            </button>
+          ))}
         </div>
+        <button
+          style={{ background: 'transparent', border: 'none' }}
+          onClick={() => {
+            setName(createNewDeck().getName());
+            openOptions();
+          }}
+        >
+          <FaPlus className="Plus" color="#515151" />
+        </button>
       </div>
       <h3>Sources</h3>
       <div className="addView">
@@ -74,7 +119,33 @@ const SourceController = () => {
             return <SourceInput key={id} view={view} deleteView={deleteView} id={id} />;
           })}
       </div>
-    </Modal>
+      <div className="buttons">
+        <button className="saveButton" onClick={closeModal}>
+          Close
+        </button>
+      </div>
+      <ModalComponent
+        className="optionsModal"
+        id="optionsModal"
+        closeModal={closeOptions}
+        controllerOpen={optionsOpen}
+        onAfterOpen={() => nameInput.current.focus()}
+      >
+        <form onSubmit={closeOptions}>
+          <input ref={nameInput} value={name} onChange={changeName} />
+
+          <button type="submit" style={{ display: 'none' }}></button>
+          <button
+            onClick={() => {
+              deleteDeck();
+              closeOptions();
+            }}
+          >
+            Delete
+          </button>
+        </form>
+      </ModalComponent>
+    </ModalComponent>
   );
 };
 
