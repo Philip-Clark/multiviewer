@@ -60,19 +60,19 @@ const SourceController = () => {
     setOptionsOpen(true);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Delete' && optionsOpen) {
-      deleteDeck();
-      closeOptions();
-    }
-  };
-
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Delete' && optionsOpen) {
+        deleteDeck();
+        closeOptions();
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [deleteDeck, optionsOpen]);
 
   const changeName = (e) => {
     setName(e.target.value);
@@ -138,6 +138,7 @@ const SourceController = () => {
             ref={nameInput}
             value={name}
             onChange={changeName}
+            autoFocus
           />
 
           <section>

@@ -11,5 +11,13 @@
 
 .viewControls {
   display: flex;
+  justify-content: flex-start;
   gap: 1em;
+  width: 100px;
+}
+
+.settings {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
 }

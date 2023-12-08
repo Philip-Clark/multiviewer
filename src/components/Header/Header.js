@@ -68,7 +68,9 @@ const Header = () => {
       </div>
       <ViewSwitcher />
 
-      <FaCog onClick={toggleSourceController} />
+      <div className="settings">
+        <FaCog onClick={toggleSourceController} />
+      </div>
     </div>
   );
 };

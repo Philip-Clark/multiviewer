@@ -10,7 +10,7 @@ const ModalComponent = ({ controllerOpen, closeModal, children, id, onAfterOpen 
       id={id}
       style={{
         overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.50)', // This is an example of a semi-transparent black color
+          backgroundColor: 'rgba(0, 0, 0, 0.878)5)', // This is an example of a semi-transparent black color
           opacity: 1,
         },
       }}

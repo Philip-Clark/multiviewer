@@ -8,6 +8,8 @@ import Embed from './components/Embed/Embed';
 import SourceController from './components/sourceController/sourceController';
 
 export const ViewContext = React.createContext(null);
+
+const welcomeHTML = '<h1>Welcome!</h1>';
 const one = View(
   'christmas Jazz',
   '<iframe width="560" height="315" src="https://www.youtube.com/embed/JM-2nzSf7Q0?si=1hFQ6i7R9abz3Nwo&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
@@ -28,8 +30,8 @@ function App() {
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
   const [decks, setDecks] = useState([
-    Deck('Tab 1', [one, two, three, four]),
-    Deck('Tab 2', [three, two]),
+    Deck('Demo 1', [one, two, three, four]),
+    Deck('Demo 2', [three, two]),
   ]);
 
   const [playChanged, setPlayChanged] = useState(0);

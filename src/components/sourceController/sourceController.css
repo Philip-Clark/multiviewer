@@ -31,16 +31,18 @@
   overflow-x: scroll;
   border-radius: 10px;
   margin: 0;
-  background-color: #232323;
+  gap: 3px;
   scrollbar-width: thin;
   text-overflow: ellipsis;
+  padding-bottom: 5px;
 }
 .TabButton {
   position: relative;
   width: 70px;
   border-radius: 10px;
   text-overflow: ellipsis;
-  background-color: transparent;
+  background-color: #515151;
+
   color: white;
   border: none;
   opacity: 0.2;
@@ -122,11 +124,11 @@
 .saveButton {
   border-radius: 4px;
   color: white;
-  padding: 0.25em 4em;
+  padding: 0.5em 6em;
   background-color: var(--accent-color);
   border: none;
   font-size: 0.8em;
-  font-weight: 100;
+  font-weight: 600;
   cursor: pointer;
   margin: 10px;
 }
@@ -204,6 +206,8 @@
   justify-content: flex-end;
   align-items: flex-end;
   margin-right: 5px;
+  padding-bottom: 10px;
+  padding-right: 10px;
 }
 
 .labels {
