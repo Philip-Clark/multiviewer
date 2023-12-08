@@ -18,7 +18,7 @@ const two = View(
 );
 const three = View(
   'Work Jazz',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/S0zv1GMBRtE?si=STkdNHpAYJ_Xy9GO&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+  '<iframe width="560" height="315" src="https://www.youtube.com/embed/S0zv1GMBRtE?si=STkdNHpAYJ_Xy9GO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
 );
 const four = View(
   'Lofi Girl',
@@ -32,23 +32,29 @@ function App() {
     Deck('Tab 2', [three, two]),
   ]);
 
-  const handleKeyDown = (e) => {
-    const key = e.key;
-    if (key === '`') setControllerOpen(true);
-    if (key === 'ArrowLeft' && deck > 0) setDeck(deck - 1);
-    if (key === 'ArrowRight' && deck < decks.length - 1) setDeck(deck + 1);
-    if (
-      e.target.tagName !== 'INPUT' &&
-      !isNaN(key) &&
-      parseInt(key) >= 0 &&
-      parseInt(key) <= decks.length
-    ) {
-      let nextDeck = parseInt(key) - 1;
-      if (nextDeck === -1 && decks.length >= 9) nextDeck = 9;
-      setDeck(nextDeck);
-    }
+  const [playChanged, setPlayChanged] = useState(0);
+  const [muteChanged, setMuteChanged] = useState(0);
+
+  const playPushed = () => {
+    setPlayChanged(playChanged + 1);
+  };
+  const mutePushed = () => {
+    setMuteChanged(muteChanged + 1);
   };
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.target.tagName == 'INPUT') return;
+      const key = e.key;
+      if (key === '`') setControllerOpen(true);
+      if (key === 'ArrowLeft' && deck > 0) setDeck(deck - 1);
+      if (key === 'ArrowRight' && deck < decks.length - 1) setDeck(deck + 1);
+      if (!isNaN(key) && parseInt(key) >= 0 && parseInt(key) <= decks.length) {
+        let nextDeck = parseInt(key) - 1;
+        if (nextDeck === -1 && decks.length >= 9) nextDeck = 9;
+        setDeck(nextDeck);
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
@@ -83,14 +89,18 @@ function App() {
           controllerOpen,
           setControllerOpen,
           createNewDeck,
-          deleteDeck, // Pass the function to context so it can be used in child components
+          deleteDeck,
+          playPushed,
+          mutePushed,
         }}
       >
         <Header />
         <div className="grid">
           {decks.length > 0 &&
             decks[deck].getViews().map((view) => {
-              return <Embed iframe={view.getIFrame()} title={view.getTitle()} />;
+              return (
+                <Embed iframe={view.getIFrame()} key={view.getIFrame()} title={view.getTitle()} />
+              );
             })}
         </div>
 

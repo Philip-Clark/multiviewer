@@ -8,3 +8,8 @@
   position: absolute;
   bottom: 0;
 }
+
+.viewControls {
+  display: flex;
+  gap: 1em;
+}
