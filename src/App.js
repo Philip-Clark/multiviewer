@@ -26,12 +26,40 @@ const four = View(
   '<iframe width="560" height="315" src="https://www.youtube.com/embed/jfKfPfyJRdk?si=XGHUZEDUFsi8Oi_d&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
 );
 function App() {
+  const storedDecks = JSON.parse(localStorage.getItem('decks'));
+
+  const localDecks = () => {
+    const newDecks = storedDecks.map((storedDeck) => {
+      const views = storedDeck.views.map((viewData) => {
+        return View(viewData.title, viewData.iframe);
+      });
+      return Deck(storedDeck.name, views);
+    });
+    return newDecks;
+  };
+
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
-  const [decks, setDecks] = useState([
-    Deck('Demo 1', [one, two, three, four]),
-    Deck('Demo 2', [three, two]),
-  ]);
+  const [decks, setDecks] = useState(
+    storedDecks
+      ? localDecks()
+      : [Deck('Demo 1', [one, two, three, four]), Deck('Demo 2', [three, two])]
+  );
+
+  const decksData = decks.map((deck) => {
+    const viewsData = deck.getViews().map((view) => {
+      return {
+        title: view.getTitle(),
+        iframe: view.getIFrame(),
+      };
+    });
+
+    return {
+      name: deck.getName(),
+      views: viewsData,
+    };
+  });
+  localStorage.setItem('decks', JSON.stringify(decksData));
 
   const [playChanged, setPlayChanged] = useState(0);
   const [muteChanged, setMuteChanged] = useState(0);

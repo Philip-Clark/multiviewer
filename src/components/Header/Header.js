@@ -17,7 +17,6 @@ const Header = () => {
 
   const toggleSourceController = () => {
     setControllerOpen(!controllerOpen);
-    console.log(controllerOpen);
   };
 
   const [isPlayToggled, setIsPlayToggled] = useState(false);
@@ -29,7 +28,6 @@ const Header = () => {
 
     // Call view.play() for each view
     views.forEach((view) => {
-      console.log({ view });
       view.play(isPlayToggled ? 0 : 1);
     });
 
@@ -45,7 +43,6 @@ const Header = () => {
 
     // Call view.mute() for each view
     views.forEach((view) => {
-      console.log({ view });
       view.mute(isMuteToggled ? 0 : 1);
     });
 

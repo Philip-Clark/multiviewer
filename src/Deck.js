@@ -21,8 +21,6 @@ const ThawedDeck = (_name = '', _views = []) => {
     return views;
   };
   const removeView = (index) => {
-    console.log(index);
-    console.log(views[index]);
     views.splice(index, 1);
     return views;
   };

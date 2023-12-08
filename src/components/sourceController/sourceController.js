@@ -28,7 +28,6 @@ const SourceController = () => {
 
   const selectDeck = (index) => {
     setDeck(index);
-    console.log({ refs });
     const scrollOptions = {
       behavior: 'smooth',
       block: 'center',
@@ -121,7 +120,7 @@ const SourceController = () => {
       </div>
       <div className="buttons">
         <button className="saveButton" onClick={closeModal}>
-          Close
+          Save
         </button>
       </div>
       <ModalComponent
