@@ -1,6 +1,6 @@
 {
   "name": "multiviewer",
-  "homepage": "https://philip-clark.github.io/IframeMultiViewer/",
+  "homepage": "https://philip-clark.github.io/multiviewer/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
