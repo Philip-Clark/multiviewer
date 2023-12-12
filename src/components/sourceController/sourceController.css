@@ -5,6 +5,11 @@
   margin-right: 20px;
 }
 
+.sources {
+  margin-right: 30px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
 .optionsDropdown {
   position: absolute;
 }
@@ -23,8 +28,9 @@
   background-color: var(--base-color); /* Set the background color of the scrollbar track */
 }
 .Plus {
-  height: 30px;
-  width: 30px;
+  height: 15px;
+  width: 15px;
+  margin-bottom: 10px;
 }
 .tabs {
   display: flex;
@@ -38,25 +44,27 @@
 }
 .TabButton {
   position: relative;
-  width: 70px;
+  min-width: 90px;
   border-radius: 10px;
   text-overflow: ellipsis;
-  background-color: #515151;
-
+  background-color: transparent;
   color: white;
-  border: none;
-  opacity: 0.2;
+  border: solid 2px var(--base-secondary-color);
+  opacity: 0.5;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   gap: 10px;
+  padding: 0.5em 0.7em;
 }
 
 .TabButton > p {
   text-overflow: ellipsis;
   text-wrap: nowrap;
   overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 #options {
@@ -114,10 +122,6 @@
 .TabButton.selected > #options {
   display: block;
   opacity: 1;
-}
-
-.modal h1 {
-  margin: 0;
 }
 
 /* save button with rounded border, white text, and color of --accent-color */
@@ -179,9 +183,6 @@
   height: 100%;
   overflow-y: scroll;
   margin-right: 10px;
-  padding: 0;
-
-  padding-right: 5px;
 }
 
 .viewList::-webkit-scrollbar {
@@ -223,4 +224,9 @@
   padding: 0px 5px;
   font-weight: 400;
   font-size: 0.8em;
+}
+
+.newSource {
+  padding: 5px;
+  padding-right: 0;
 }

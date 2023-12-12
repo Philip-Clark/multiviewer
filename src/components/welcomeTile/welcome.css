@@ -1,0 +1,43 @@
+.welcomeTile {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  width: 100%;
+  background: rgb(28, 28, 28);
+  background: radial-gradient(circle, rgba(28, 28, 28, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+.welcomeTile h1 {
+  color: white;
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+  font-weight: 900;
+}
+
+.welcomeTile p {
+  color: white;
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+}
+
+.welcomeTile button {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background: var(--accent-color);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.welcomeTile button:hover {
+  box-shadow: 0 0 10px rgb(106, 164, 71);
+}

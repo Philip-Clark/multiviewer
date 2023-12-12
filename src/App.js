@@ -6,25 +6,10 @@ import './theme.css';
 import './App.css';
 import Embed from './components/Embed/Embed';
 import SourceController from './components/sourceController/sourceController';
+import Welcome from './components/welcomeTile/Welcome';
 
 export const ViewContext = React.createContext(null);
 
-const one = View(
-  'christmas Jazz',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/JM-2nzSf7Q0?si=1hFQ6i7R9abz3Nwo&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-);
-const two = View(
-  'Synth Wave',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/UedTcufyrHc?si=tGpQdaCAUeeSyG7B&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-);
-const three = View(
-  'Work Jazz',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/S0zv1GMBRtE?si=STkdNHpAYJ_Xy9GO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-);
-const four = View(
-  'Lofi Girl',
-  '<iframe width="560" height="315" src="https://www.youtube.com/embed/jfKfPfyJRdk?si=XGHUZEDUFsi8Oi_d&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
-);
 function App() {
   const storedDecks = JSON.parse(localStorage.getItem('decks'));
 
@@ -40,11 +25,7 @@ function App() {
 
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
-  const [decks, setDecks] = useState(
-    storedDecks
-      ? localDecks()
-      : [Deck('Demo 1', [one, two, three, four]), Deck('Demo 2', [three, two])]
-  );
+  const [decks, setDecks] = useState(storedDecks ? localDecks() : [Deck('Welcome', [])]);
 
   const decksData = decks.map((deck) => {
     const viewsData = deck.getViews().map((view) => {
@@ -125,12 +106,13 @@ function App() {
       >
         <Header />
         <div className="grid">
-          {decks.length > 0 &&
+          {decks.length > 0 && decks[deck].getViews().length > 0 ? (
             decks[deck].getViews().map((view) => {
-              return (
-                <Embed iframe={view.getIFrame()} key={view.getIFrame()} title={view.getTitle()} />
-              );
-            })}
+              return <Embed view={view} key={view.getIFrame()} />;
+            })
+          ) : (
+            <Welcome openController={setControllerOpen} />
+          )}
         </div>
 
         <SourceController />

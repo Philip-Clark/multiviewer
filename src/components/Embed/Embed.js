@@ -11,15 +11,15 @@ function extractIframeSource(iframe) {
   return null;
 }
 
-function Embed({ iframe, title }) {
+function Embed({ view }) {
   const { decks, deck } = useContext(ViewContext);
   const coloumnMap = [0, 1, 2, 2, 2, 3, 3, 4, 4, 3, 5, 4, 4, 5, 5, 5, 4, 8, 8];
   const viewCount = decks[deck].getViews().length;
   const columns = viewCount > coloumnMap.length ? 10000 : coloumnMap[decks[deck].getViews().length];
   return (
     <div className="view" style={{ minWidth: `calc(100% / ${columns})` }}>
-      <p id="title">{title}</p>
-      <iframe src={extractIframeSource(iframe)} />
+      <p id="title">{view.getTitle()}</p>
+      <iframe src={extractIframeSource(view.getIFrame())} />
     </div>
   );
 }
