@@ -39,9 +39,14 @@ export default function FeedBackModal({ children }) {
   return (
     <ModalComponent closeModal={closeModal} controllerOpen={feedBackOpen}>
       <h1>FeedBack</h1>
-      <form title="feedback" ref={feedBackArea} onSubmit={handleFeedBackSubmit}>
+      <form
+        title="feedback"
+        className="feedBackForm"
+        ref={feedBackArea}
+        onSubmit={handleFeedBackSubmit}
+      >
         <textarea
-          name="feedback"
+          name="feedBackForm"
           id="feedback"
           cols="30"
           rows="10"

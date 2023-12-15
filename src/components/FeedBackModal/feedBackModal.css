@@ -1,4 +1,4 @@
-form {
+.feedBackForm {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -10,7 +10,7 @@ form {
   align-items: flex-end;
 }
 
-textarea {
+.feedBackForm textarea {
   font-family: 'inter', sans-serif;
   resize: none;
   background-color: var(--base-secondary-color);
@@ -22,11 +22,11 @@ textarea {
   box-sizing: border-box;
   height: 100%;
 }
-textarea:focus {
+.feedBackForm textarea:focus {
   outline: solid var(--accent-color) 2px;
 }
 
-button {
+.feedBackForm button {
   width: 30ch;
   border-radius: 4px;
   color: white;
@@ -39,14 +39,14 @@ button {
   height: min-content;
 }
 
-p {
+.feedBackForm p {
   font-size: 1em;
   font-weight: 400;
   color: var(--accent-color);
   line-height: 0.2em;
 }
 
-form div {
+.feedBackForm div {
   display: flex;
   justify-content: space-between;
   width: 100%;
