@@ -22,7 +22,8 @@ const localDecks = (storedDecks) => {
 
 function App() {
   const storedDecks = JSON.parse(localStorage.getItem('decks'));
-  const [deck, setDeck] = useState(0);
+  const savedDeck = JSON.parse(localStorage.getItem('deck'));
+  const [deck, setDeck] = useState(savedDeck ? savedDeck : 0);
   const [controllerOpen, setControllerOpen] = useState(false);
   const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
 
@@ -57,6 +58,8 @@ function App() {
       if (key === 'ArrowRight' && canGoToNextDeck) setDeck(deck + 1);
       if (key === openOptionsHotKey) setControllerOpen(true);
     };
+
+    localStorage.setItem('deck', JSON.stringify(deck));
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
