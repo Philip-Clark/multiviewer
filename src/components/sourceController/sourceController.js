@@ -99,7 +99,7 @@ const SourceController = () => {
         </div>
         <button
           style={{ background: 'transparent', border: 'none' }}
-          onClick={() => onClickNewDeck}
+          onClick={() => onClickNewDeck()}
         >
           <FaPlus className="Plus" color="#515151" />
         </button>
@@ -108,7 +108,7 @@ const SourceController = () => {
       <div className="addView">
         <div className="labels">
           <p>Name</p>
-          <p>Url</p>
+          <p>Embed Code</p>
         </div>
         <SourceInput view={View()} addView={addView} />
       </div>

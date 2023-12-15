@@ -25,8 +25,6 @@ function App() {
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
   const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
-  const [playChanged, setPlayChanged] = useState(0);
-  const [muteChanged, setMuteChanged] = useState(0);
 
   const decksData = decks.map((deck) => {
     const viewsData = deck.getViews().map((view) => {
@@ -42,9 +40,6 @@ function App() {
     };
   });
   localStorage.setItem('decks', JSON.stringify(decksData));
-
-  const playPushed = () => setPlayChanged(playChanged + 1);
-  const mutePushed = () => setMuteChanged(muteChanged + 1);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -97,8 +92,6 @@ function App() {
           setControllerOpen,
           createNewDeck,
           deleteDeck,
-          playPushed,
-          mutePushed,
         }}
       >
         <Header />
