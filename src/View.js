@@ -51,17 +51,9 @@ const ThawedView = (_title = '', _iframe = '') => {
   const mute = () => {
     const sourceURL = getSourceURL();
     if (!sourceURL) return;
-
-    const regex = /mute=([^&]+)/;
-    const match = regex.exec(sourceURL);
-
-    if (match?.[1]) {
-      const newSourceURL = sourceURL.replace(regex, `mute=1`);
-      setSourceURL(newSourceURL);
-    } else {
-      const newSourceURL = sourceURL + (sourceURL.includes('?') ? '&' : '?') + `mute=1`;
-      setSourceURL(newSourceURL);
-    }
+    if (sourceURL.includes('mute=1&muted=1')) return;
+    const newSourceURL = sourceURL + (sourceURL.includes('?') ? '&' : '?') + `mute=1&muted=1`;
+    setSourceURL(newSourceURL.replace('amp;', ''));
   };
 
   const getIFrame = () => {

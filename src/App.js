@@ -96,9 +96,9 @@ function App() {
       >
         <Header />
         <div className="grid">
-          {decks.length > 0 && decks[deck].getViews().length > 0 ? (
-            decks[deck].getViews().map((view) => {
-              return <Embed view={view} key={view.getIFrame()} />;
+          {decks[deck].getViews().length > 0 ? (
+            decks[deck].getViews().map((view, index) => {
+              return <Embed view={view} key={`deck${deck}-view${index}`} />;
             })
           ) : (
             <Welcome openController={setControllerOpen} />
