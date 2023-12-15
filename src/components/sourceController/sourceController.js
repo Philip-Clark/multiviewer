@@ -1,31 +1,30 @@
-import React, { useContext, useRef, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { FaEllipsisV, FaPlus } from 'react-icons/fa';
 import { ViewContext } from '../../App';
-import './sourceController.css';
-import SourceInput from '../sourceInput/SourceInput';
 import View from '../../View';
-import _ from 'lodash';
-import { FaEllipsisV, FaPen, FaPlus } from 'react-icons/fa';
 import ModalComponent from '../modal/ModalComponent';
+import SourceInput from '../sourceInput/SourceInput';
+import './sourceController.css';
 
+/**
+ * SourceController modal component.
+ *
+ * @component
+ * @returns {JSX.Element} SourceController component.
+ */
 const SourceController = () => {
-  // get current deck from viewContext
-  const {
-    decks,
-    setDeck,
-    deck,
-    setDecks,
-    controllerOpen,
-    setControllerOpen,
-    deleteDeck,
-    createNewDeck,
-  } = useContext(ViewContext);
+  const { decks, setDeck, deck, controllerOpen, setControllerOpen, deleteDeck, createNewDeck } =
+    useContext(ViewContext);
 
   const [changedViews, setChangedViews] = useState(0);
   const [name, setName] = useState(decks[deck].getName());
-  const refs = useRef(decks.map(() => null));
-  const nameInput = useRef(null);
   const [optionsOpen, setOptionsOpen] = useState(false);
 
+  const refs = useRef(decks.map(() => null));
+  const nameInput = useRef(null);
+
+  const closeModal = () => setControllerOpen(false);
+  const closeOptions = () => setOptionsOpen(false);
   const selectDeck = (index) => {
     setDeck(index);
     const scrollOptions = {
@@ -35,28 +34,21 @@ const SourceController = () => {
     };
     refs.current[index].current.scrollIntoView(scrollOptions);
   };
-
-  const closeModal = () => {
-    setControllerOpen(false);
-  };
-
   const addView = (title, iframe) => {
     decks[deck].addView(View(title, iframe));
     setChangedViews(changedViews + 1);
   };
-
   const deleteView = (id) => {
     decks[deck].removeView(id);
     setChangedViews(changedViews + 1);
   };
-
-  const closeOptions = () => {
-    setOptionsOpen(false);
-  };
-
   const openOptions = () => {
     setName(decks[deck].getName());
     setOptionsOpen(true);
+  };
+  const changeName = (e) => {
+    setName(e.target.value);
+    decks[deck].setName(e.target.value);
   };
 
   useEffect(() => {
@@ -66,40 +58,48 @@ const SourceController = () => {
         closeOptions();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [deleteDeck, optionsOpen]);
 
-  const changeName = (e) => {
-    setName(e.target.value);
-    decks[deck].setName(e.target.value);
+  const renderTabButton = (thisDeck, index) => {
+    const isTabSelected = deck === index ? 'selected' : '';
+    const ref = refs.current[index] || (refs.current[index] = React.createRef());
+
+    return (
+      <button
+        className={`TabButton ${isTabSelected}`}
+        key={index}
+        onClick={() => selectDeck(index)}
+        ref={ref}
+      >
+        <p>{thisDeck.getName()}</p>
+        <FaEllipsisV id="options" onClick={openOptions} />
+      </button>
+    );
+  };
+
+  const renderInput = (view, id) => {
+    const key = `deck-${deck}-view-${id}`;
+    return <SourceInput key={key} view={view} deleteView={deleteView} id={id} />;
+  };
+
+  const onClickNewDeck = () => {
+    setName(createNewDeck().getName());
+    openOptions();
   };
 
   return (
     <ModalComponent closeModal={closeModal} controllerOpen={controllerOpen}>
       <div className="tabsRow">
         <div className="tabs">
-          {decks.map((thisDeck, index) => (
-            <button
-              className={`TabButton ${deck === index ? 'selected' : ''}`}
-              key={index}
-              onClick={() => selectDeck(index)}
-              ref={refs.current[index] || (refs.current[index] = React.createRef())}
-            >
-              <p>{thisDeck.getName()}</p>
-              <FaEllipsisV id="options" onClick={openOptions} />
-            </button>
-          ))}
+          {decks.map((thisDeck, index) => renderTabButton(thisDeck, index))}
         </div>
         <button
           style={{ background: 'transparent', border: 'none' }}
-          onClick={() => {
-            setName(createNewDeck().getName());
-            openOptions();
-          }}
+          onClick={() => onClickNewDeck}
         >
           <FaPlus className="Plus" color="#515151" />
         </button>
@@ -108,15 +108,12 @@ const SourceController = () => {
       <div className="addView">
         <div className="labels">
           <p>Name</p>
-          <p>Link</p>
+          <p>Url</p>
         </div>
         <SourceInput view={View()} addView={addView} />
       </div>
       <div className="inputs viewList">
-        {decks.length > 0 &&
-          decks[deck].getViews().map((view, id) => {
-            return <SourceInput key={id} view={view} deleteView={deleteView} id={id} />;
-          })}
+        {decks[deck].getViews().map((view, id) => renderInput(view, id))}
       </div>
       <div className="buttons">
         <button className="saveButton" onClick={closeModal}>
