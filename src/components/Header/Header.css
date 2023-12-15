@@ -20,4 +20,5 @@
   display: flex;
   justify-content: flex-end;
   width: 100px;
+  gap: 10px;
 }

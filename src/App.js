@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import SourceController from './components/sourceController/sourceController';
 import Welcome from './components/welcomeTile/Welcome';
 import './theme.css';
+import FeedBackModal from './components/FeedBackModal/FeedBackModal';
 
 export const ViewContext = React.createContext(null);
 
@@ -25,6 +26,7 @@ function App() {
   const savedDeck = JSON.parse(localStorage.getItem('deck'));
   const [deck, setDeck] = useState(savedDeck ? savedDeck : 0);
   const [controllerOpen, setControllerOpen] = useState(false);
+  const [feedBackOpen, setFeedBackOpen] = useState(false);
   const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
 
   const decksData = decks.map((deck) => {
@@ -93,6 +95,8 @@ function App() {
           setDeck,
           controllerOpen,
           setControllerOpen,
+          feedBackOpen,
+          setFeedBackOpen,
           createNewDeck,
           deleteDeck,
         }}
@@ -109,6 +113,7 @@ function App() {
         </div>
 
         <SourceController />
+        <FeedBackModal />
       </ViewContext.Provider>
     </div>
   );

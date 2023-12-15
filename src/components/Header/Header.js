@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaCog } from 'react-icons/fa';
+import { MdFeedback } from 'react-icons/md';
 import { ViewContext } from '../../App';
 import ViewSwitcher from '../ViewSwitcher/ViewSwitcher';
 import './Header.css';
@@ -10,9 +11,11 @@ import './Header.css';
  * @returns {JSX.Element} The rendered header component.
  */
 const Header = () => {
-  const { controllerOpen, setControllerOpen } = useContext(ViewContext);
+  const { controllerOpen, setControllerOpen, setFeedBackOpen, FeedBackOpen } =
+    useContext(ViewContext);
 
   const toggleSourceController = () => setControllerOpen(!controllerOpen);
+  const toggleFeedBackOpen = () => setFeedBackOpen(!FeedBackOpen);
 
   return (
     <div className="header">
@@ -20,6 +23,7 @@ const Header = () => {
       <ViewSwitcher />
       <div className="settings">
         <FaCog onClick={toggleSourceController} />
+        <MdFeedback onClick={toggleFeedBackOpen} />
       </div>
     </div>
   );
