@@ -1,31 +1,32 @@
-import View from './View';
-import Deck from './Deck';
-import Header from './components/Header/Header';
-import React, { useState, useEffect } from 'react';
-import './theme.css';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Deck from './Deck';
+import View from './View';
 import Embed from './components/Embed/Embed';
+import Header from './components/Header/Header';
 import SourceController from './components/sourceController/sourceController';
 import Welcome from './components/welcomeTile/Welcome';
+import './theme.css';
 
 export const ViewContext = React.createContext(null);
 
+const localDecks = (storedDecks) => {
+  const newDecks = storedDecks.map((storedDeck) => {
+    const views = storedDeck.views.map((viewData) => {
+      return View(viewData.title, viewData.iframe);
+    });
+    return Deck(storedDeck.name, views);
+  });
+  return newDecks;
+};
+
 function App() {
   const storedDecks = JSON.parse(localStorage.getItem('decks'));
-
-  const localDecks = () => {
-    const newDecks = storedDecks.map((storedDeck) => {
-      const views = storedDeck.views.map((viewData) => {
-        return View(viewData.title, viewData.iframe);
-      });
-      return Deck(storedDeck.name, views);
-    });
-    return newDecks;
-  };
-
   const [deck, setDeck] = useState(0);
   const [controllerOpen, setControllerOpen] = useState(false);
-  const [decks, setDecks] = useState(storedDecks ? localDecks() : [Deck('Welcome', [])]);
+  const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
+  const [playChanged, setPlayChanged] = useState(0);
+  const [muteChanged, setMuteChanged] = useState(0);
 
   const decksData = decks.map((deck) => {
     const viewsData = deck.getViews().map((view) => {
@@ -42,34 +43,30 @@ function App() {
   });
   localStorage.setItem('decks', JSON.stringify(decksData));
 
-  const [playChanged, setPlayChanged] = useState(0);
-  const [muteChanged, setMuteChanged] = useState(0);
+  const playPushed = () => setPlayChanged(playChanged + 1);
+  const mutePushed = () => setMuteChanged(muteChanged + 1);
 
-  const playPushed = () => {
-    setPlayChanged(playChanged + 1);
-  };
-  const mutePushed = () => {
-    setMuteChanged(muteChanged + 1);
-  };
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.target.tagName == 'INPUT') return;
+      const isInputFocused = e.target.tagName === 'INPUT';
+      if (isInputFocused) return;
+
       const key = e.key;
-      if (key === '`') setControllerOpen(true);
-      if (key === 'ArrowLeft' && deck > 0) setDeck(deck - 1);
-      if (key === 'ArrowRight' && deck < decks.length - 1) setDeck(deck + 1);
-      if (!isNaN(key) && parseInt(key) >= 0 && parseInt(key) <= decks.length) {
-        let nextDeck = parseInt(key) - 1;
-        if (nextDeck === -1 && decks.length >= 9) nextDeck = 9;
-        setDeck(nextDeck);
-      }
+      const openOptionsHotKey = '`';
+      const keyNumber = parseInt(key);
+      const canGoToPreviousDeck = deck > 0;
+      const canGoToNextDeck = deck + 1 < decks.length;
+
+      if (!isNaN(key) && keyNumber >= 0 && keyNumber <= decks.length) setDeck(keyNumber - 1);
+      if (key === 'ArrowLeft' && canGoToPreviousDeck) setDeck(deck - 1);
+      if (key === 'ArrowRight' && canGoToNextDeck) setDeck(deck + 1);
+      if (key === openOptionsHotKey) setControllerOpen(true);
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [decks, deck]);
+
   const createNewDeck = () => {
     const newDeck = Deck(`Tab ${decks.length + 1}`, []);
     setDecks((prevDecks) => [...prevDecks, newDeck]);
