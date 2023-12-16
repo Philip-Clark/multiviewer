@@ -65,7 +65,7 @@ const SourceInput = ({ view, addView, deleteView, id }) => {
         name="Name"
         onChange={handleInputChange}
         value={title}
-        placeholder="Display name"
+        placeholder="Title"
       />
       <input
         className="iFrame"
@@ -73,7 +73,7 @@ const SourceInput = ({ view, addView, deleteView, id }) => {
         type="text"
         onChange={handleInputChange}
         value={iframe}
-        placeholder="<Iframe /> embed code"
+        placeholder="Embed code"
       />
       <button type="submit" style={{ display: 'none' }}></button>
       {renderAddDeleteButton()}

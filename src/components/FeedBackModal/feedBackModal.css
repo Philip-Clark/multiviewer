@@ -10,7 +10,8 @@
   align-items: flex-end;
 }
 
-.feedBackForm textarea {
+.feedBackForm textarea,
+.feedBackForm input {
   font-family: 'inter', sans-serif;
   resize: none;
   background-color: var(--base-secondary-color);
@@ -21,6 +22,10 @@
   width: 100%;
   box-sizing: border-box;
   height: 100%;
+}
+
+.feedBackForm input {
+  height: auto;
 }
 .feedBackForm textarea:focus {
   outline: solid var(--accent-color) 2px;

@@ -40,10 +40,12 @@ export default function FeedBackModal({ children }) {
       <h1>FeedBack</h1>
       <form
         title="feedback"
+        name="feedback"
         className="feedBackForm"
         ref={feedBackArea}
         onSubmit={handleFeedBackSubmit}
       >
+        <input type="email" name="contactEmail" placeholder="Contact Email (Optional)"></input>
         <textarea
           name="feedBackForm"
           id="feedback"

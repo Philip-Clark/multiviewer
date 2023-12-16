@@ -17,7 +17,7 @@ const ThawedDeck = (_name = '', _views = []) => {
   };
 
   const addView = (view) => {
-    views.push(view);
+    views.unshift(view);
     return views;
   };
   const removeView = (index) => {

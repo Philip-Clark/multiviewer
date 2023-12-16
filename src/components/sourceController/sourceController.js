@@ -104,22 +104,16 @@ const SourceController = () => {
           <FaPlus className="Plus" color="#515151" />
         </button>
       </div>
-      <h3>Sources</h3>
-      <div className="addView">
-        <div className="labels">
-          <p>Name</p>
-          <p>Embed Code</p>
-        </div>
-        <SourceInput view={View()} addView={addView} />
+      <div className="sources">
+        <h2>Sources</h2>
       </div>
+
       <div className="inputs viewList">
         {decks[deck].getViews().map((view, id) => renderInput(view, id))}
       </div>
-      <div className="buttons">
-        <button className="saveButton" onClick={closeModal}>
-          Save
-        </button>
-      </div>
+      <button className="add saveButton" onClick={() => addView('', '')}>
+        Add Source
+      </button>
       <ModalComponent
         className="optionsModal"
         id="optionsModal"

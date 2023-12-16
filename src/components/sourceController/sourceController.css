@@ -5,11 +5,6 @@
   margin-right: 20px;
 }
 
-.sources {
-  margin-right: 30px;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
 .optionsDropdown {
   position: absolute;
 }
@@ -137,6 +132,25 @@
   margin: 10px;
 }
 
+.sources h2 {
+  margin: 0;
+}
+
+.sources {
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.add {
+  align-self: center;
+  box-sizing: border-box;
+  padding: 0.8em;
+  width: 50ch;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 #optionsSave {
   margin: 0;
   width: 100%;
@@ -154,32 +168,18 @@
   cursor: pointer;
 }
 
-.addView {
-  display: flex;
-  flex-grow: 1;
-  flex-basis: content;
-  flex-direction: column;
-  align-content: stretch;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 10px;
-  height: max-content;
-  margin-right: 20px;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-}
-
 .viewList {
   scrollbar-color: var(--base-secondary-color);
   scrollbar-width: 5px;
-  padding: 5px;
   display: flex;
   flex-shrink: 1;
+  margin-bottom: 10px;
   flex-direction: column;
   align-content: stretch;
   align-items: stretch;
   justify-content: flex-start;
   gap: 10px;
+  padding: 10px;
   height: 100%;
   overflow-y: scroll;
   margin-right: 10px;
