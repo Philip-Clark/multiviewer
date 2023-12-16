@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/multiviewer/static/css/main.6c6b7b52.css",
+    "main.css": "/multiviewer/static/css/main.6c528695.css",
     "main.js": "/multiviewer/static/js/main.81eec8aa.js",
     "index.html": "/multiviewer/index.html",
-    "main.6c6b7b52.css.map": "/multiviewer/static/css/main.6c6b7b52.css.map",
+    "main.6c528695.css.map": "/multiviewer/static/css/main.6c528695.css.map",
     "main.81eec8aa.js.map": "/multiviewer/static/js/main.81eec8aa.js.map"
   },
   "entrypoints": [
-    "static/css/main.6c6b7b52.css",
+    "static/css/main.6c528695.css",
     "static/js/main.81eec8aa.js"
   ]
 }
