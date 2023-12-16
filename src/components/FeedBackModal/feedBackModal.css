@@ -27,7 +27,8 @@
 .feedBackForm input {
   height: auto;
 }
-.feedBackForm textarea:focus {
+.feedBackForm textarea:focus,
+.feedBackForm input:focus {
   outline: solid var(--accent-color) 2px;
 }
 

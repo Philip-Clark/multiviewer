@@ -46,6 +46,7 @@ export default function FeedBackModal({ children }) {
         onSubmit={handleFeedBackSubmit}
       >
         <input type="email" name="contactEmail" placeholder="Contact Email (Optional)"></input>
+
         <textarea
           name="feedBackForm"
           id="feedback"
