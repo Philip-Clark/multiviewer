@@ -17,7 +17,7 @@ export default function FeedBackModal({ children }) {
   const [responseMessage, setResponseMessage] = useState(<p></p>);
   const handleFeedBackSubmit = (e) => {
     e.preventDefault();
-    setResponseMessage(<p>Sending Feedback</p>);
+    setResponseMessage(<p>Sending Feedback...</p>);
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, feedBackArea.current, PUBLIC_KEY).then(
       (result) => {
         setResponseMessage(<p>Feedback Sent</p>);
@@ -34,8 +34,7 @@ export default function FeedBackModal({ children }) {
     );
   };
 
-  const defaultMessage =
-    'Dev team, \n\nWhile doing { explain the context of the feedback } \nI wanted to inform you that { Feedback here } \n\nThanks, \n{Your name here}';
+  const defaultMessage = 'Enter Feedback Here';
   return (
     <ModalComponent closeModal={closeModal} controllerOpen={feedBackOpen}>
       <h1>FeedBack</h1>
@@ -48,9 +47,8 @@ export default function FeedBackModal({ children }) {
         <textarea
           name="feedBackForm"
           id="feedback"
-          cols="30"
-          rows="10"
           placeholder={defaultMessage}
+          required
         ></textarea>
         <div>
           {responseMessage}

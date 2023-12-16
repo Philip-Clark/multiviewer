@@ -19,11 +19,12 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="viewControls"></div>
+      <div className="viewControls">
+        <MdFeedback onClick={toggleFeedBackOpen} />
+      </div>
       <ViewSwitcher />
       <div className="settings">
         <FaCog onClick={toggleSourceController} />
-        <MdFeedback onClick={toggleFeedBackOpen} />
       </div>
     </div>
   );
