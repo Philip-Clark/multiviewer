@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/sourceController/sourceController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/sourceController/sourceController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useContext, useEffect, useRef, useState } from 'react';
+import { FaEllipsisV, FaPlus } from 'react-icons/fa';
+import { ViewContext } from '../../App';
+import View from '../../View';
+import ModalComponent from '../modal/ModalComponent';
+import SourceInput from '../sourceInput/SourceInput';
+import './sourceController.css';
+
+/**
+ * SourceController modal component.
+ *
+ * @component
+ * @returns {JSX.Element} SourceController component.
+ */
+const SourceController = () => {
+  const { decks, setDeck, deck, controllerOpen, setControllerOpen, deleteDeck, createNewDeck } =
+    useContext(ViewContext);
+
+  const [changedViews, setChangedViews] = useState(0);
+  const [name, setName] = useState(decks[deck].getName());
+  const [optionsOpen, setOptionsOpen] = useState(false);
+
+  const refs = useRef(decks.map(() => null));
+  const nameInput = useRef(null);
+
+  const closeModal = () => setControllerOpen(false);
+  const closeOptions = () => setOptionsOpen(false);
+  const selectDeck = (index) => {
+    setDeck(index);
+    const scrollOptions = {
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+    };
+    refs.current[index].current.scrollIntoView(scrollOptions);
+  };
+  const addView = (title, iframe) => {
+    decks[deck].addView(View(title, iframe));
+    setChangedViews(changedViews + 1);
+  };
+  const deleteView = (id) => {
+    decks[deck].removeView(id);
+    setChangedViews(changedViews + 1);
+  };
+  const openOptions = () => {
+    setName(decks[deck].getName());
+    setOptionsOpen(true);
+  };
+  const changeName = (e) => {
+    setName(e.target.value);
+    decks[deck].setName(e.target.value);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Delete' &amp;&amp; optionsOpen) {
+        deleteDeck();
+        closeOptions();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [deleteDeck, optionsOpen]);
+
+  const renderTabButton = (thisDeck, index) => {
+    const isTabSelected = deck === index ? 'selected' : '';
+    const ref = refs.current[index] || (refs.current[index] = React.createRef());
+
+    return (
+      &lt;button
+        className={`TabButton ${isTabSelected}`}
+        key={index}
+        onClick={() => selectDeck(index)}
+        ref={ref}
+      >
+        &lt;p>{thisDeck.getName()}&lt;/p>
+        &lt;FaEllipsisV id="options" onClick={openOptions} />
+      &lt;/button>
+    );
+  };
+
+  const renderInput = (view, id) => {
+    const key = `deck-${deck}-view-${id}`;
+    return &lt;SourceInput key={key} view={view} deleteView={deleteView} id={id} />;
+  };
+
+  const onClickNewDeck = () => {
+    setName(createNewDeck().getName());
+    openOptions();
+  };
+
+  return (
+    &lt;ModalComponent closeModal={closeModal} controllerOpen={controllerOpen}>
+      &lt;div className="tabsRow">
+        &lt;div className="tabs">
+          {decks.map((thisDeck, index) => renderTabButton(thisDeck, index))}
+        &lt;/div>
+        &lt;button
+          style={{ background: 'transparent', border: 'none' }}
+          onClick={() => onClickNewDeck()}
+        >
+          &lt;FaPlus className="Plus" color="#515151" />
+        &lt;/button>
+      &lt;/div>
+      &lt;div className="sources">
+        &lt;h2>Sources&lt;/h2>
+      &lt;/div>
+
+      &lt;div className="inputs viewList">
+        {decks[deck].getViews().map((view, id) => renderInput(view, id))}
+      &lt;/div>
+      &lt;button className="add saveButton" onClick={() => addView('', '')}>
+        Add Source
+      &lt;/button>
+      &lt;ModalComponent
+        className="optionsModal"
+        id="optionsModal"
+        closeModal={closeOptions}
+        controllerOpen={optionsOpen}
+        onAfterOpen={() => nameInput.current.focus()}
+      >
+        &lt;form onSubmit={closeOptions}>
+          &lt;input
+            className="tabNameInput"
+            key={name}
+            ref={nameInput}
+            value={name}
+            onChange={changeName}
+            autoFocus
+          />
+
+          &lt;section>
+            &lt;button type="submit" className="saveButton" id="optionsSave">
+              Save
+            &lt;/button>
+            &lt;button
+              className="deleteButton"
+              onClick={() => {
+                deleteDeck();
+                closeOptions();
+              }}
+            >
+              Delete
+            &lt;/button>
+          &lt;/section>
+        &lt;/form>
+      &lt;/ModalComponent>
+    &lt;/ModalComponent>
+  );
+};
+
+export default SourceController;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#Embed">Embed</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#ModalComponent">ModalComponent</a></li><li><a href="global.html#SourceController">SourceController</a></li><li><a href="global.html#SourceInput">SourceInput</a></li><li><a href="global.html#Welcome">Welcome</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Dec 18 2023 15:55:53 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
