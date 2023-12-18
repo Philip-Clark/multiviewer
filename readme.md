@@ -40,16 +40,14 @@ If there is another source you wish to use and you find that mutl-i-viewer doesn
 - **Stubborn Stream**: It's been observed on sporadic and non repeatable occasions that a stream will persist and multiply between tabs and/or after deletion
 
   **The Solution is to refresh the page**. We have found refreshing to always work. If there's a certian stream that continues to do this, try removing the stream and re-adding it. Also please submit feedback indicating that you encountered the Stubborn Stream issue and any details about the surrounding circumstances you can provide.
-  <br></br>
+  `<br></br>`
 
 - **No Data Sync:** Mult-i-viewer currently uses localStorage on your browser to save sources and tabs. Unfortunately this means if you move to another computer or browser you will not have your localy saved tabs and sources.
 
   **The Solution is for Mult-i-Viewer to implement accounts** and a hosted database. This is not an impossible or neccesarly difficult feature to add, but in the spirit of less is more, I decided not to include it initially. If this is something you need or want, please let me know through the feedback form and enter you enter you contact email so you can be updated on progress regarding this feature
-
-<br></br>
+  `<br></br>`
 
 - **Styles from Embed Code not Working:** As mentioned in the "Internal Workings" section, Mult-i-Viewer does not use the styles, sorrounding html, or any other attributes from the original source. This has to do with how Mult-i-Viewer handles displaying the sources.
 
   **The Solution is to collect data on what attributes of the original sources users want or need**, and copy them over to the displayed source. Please submit feedback on this topic if it's something you would like to see implemented.
-
-<br></br>
+  `<br></br>`
