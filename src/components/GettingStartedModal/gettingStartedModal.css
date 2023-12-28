@@ -1,0 +1,59 @@
+#titleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#titleBar h1 {
+  width: 100%;
+  text-align: center;
+}
+
+#GettingStartedModal {
+  padding: 20px;
+}
+
+#content div {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  align-items: center;
+  margin: 0px 50px;
+}
+
+.modal {
+  height: 90%;
+  max-width: 70ch;
+}
+
+#content img {
+  border: none;
+  border-radius: 20px;
+  width: 90%;
+  height: auto;
+}
+
+#content p {
+  font-weight: 400;
+  text-align: left;
+  width: 100%;
+}
+
+#buttons {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+}
+
+#buttons button {
+  max-width: 20ch;
+}
+
+#buttons p {
+  margin: 0;
+  margin-right: 20px;
+}

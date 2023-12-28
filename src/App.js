@@ -5,6 +5,7 @@
  * @returns {JSX.Element} The rendered App component.
  */
 import React, { useEffect, useState } from 'react';
+import ReactJoyride from 'react-joyride';
 import './App.css';
 import Deck from './Deck';
 import View from './View';
@@ -14,6 +15,7 @@ import SourceController from './components/sourceController/sourceController';
 import Welcome from './components/welcomeTile/Welcome';
 import './theme.css';
 import FeedBackModal from './components/FeedBackModal/FeedBackModal';
+import { GettingStartedModal } from './components/GettingStartedModal/GettingStartedModal';
 
 export const ViewContext = React.createContext(null);
 
@@ -37,6 +39,7 @@ function App() {
   const savedDeck = JSON.parse(localStorage.getItem('deck'));
   const [deck, setDeck] = useState(savedDeck ? savedDeck : 0);
   const [controllerOpen, setControllerOpen] = useState(false);
+  const [gettingStartedModalOpen, setGettingStartedModalOpen] = useState(true);
   const [feedBackOpen, setFeedBackOpen] = useState(false);
   const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
 
@@ -110,9 +113,14 @@ function App() {
           setFeedBackOpen,
           createNewDeck,
           deleteDeck,
+          gettingStartedModalOpen,
+          setGettingStartedModalOpen,
         }}
       >
         <Header />
+
+        <GettingStartedModal />
+
         <div className="grid">
           {decks[deck].getViews().length > 0 ? (
             decks[deck].getViews().map((view, index) => {

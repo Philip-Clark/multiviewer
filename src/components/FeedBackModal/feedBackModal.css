@@ -32,19 +32,6 @@
   outline: solid var(--accent-color) 2px;
 }
 
-.feedBackForm button {
-  width: 30ch;
-  border-radius: 4px;
-  color: white;
-  padding: 0.5em 2em;
-  background-color: var(--accent-color);
-  border: none;
-  font-size: 0.8em;
-  font-weight: 600;
-  cursor: pointer;
-  height: min-content;
-}
-
 .feedBackForm p {
   font-size: 1em;
   font-weight: 400;

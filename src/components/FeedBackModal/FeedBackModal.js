@@ -36,7 +36,7 @@ export default function FeedBackModal({ children }) {
 
   const defaultMessage = 'Enter Feedback Here';
   return (
-    <ModalComponent closeModal={closeModal} controllerOpen={feedBackOpen}>
+    <ModalComponent id="feedbackModal" closeModal={closeModal} controllerOpen={feedBackOpen}>
       <div className="feedbackHeader">
         <h1>FeedBack</h1>
         <a
@@ -64,7 +64,9 @@ export default function FeedBackModal({ children }) {
         ></textarea>
         <div>
           {responseMessage}
-          <button type="submit">Send Feedback</button>
+          <button type="submit" className="major">
+            Send Feedback
+          </button>
         </div>
       </form>
     </ModalComponent>

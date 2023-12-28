@@ -92,7 +92,11 @@ const SourceController = () => {
   };
 
   return (
-    <ModalComponent closeModal={closeModal} controllerOpen={controllerOpen}>
+    <ModalComponent
+      id="sourceControllerModal"
+      closeModal={closeModal}
+      controllerOpen={controllerOpen}
+    >
       <div className="tabsRow">
         <div className="tabs">
           {decks.map((thisDeck, index) => renderTabButton(thisDeck, index))}
