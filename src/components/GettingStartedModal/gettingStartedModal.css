@@ -29,16 +29,70 @@
 }
 
 #content img {
-  border: none;
+  border: solid var(--accent-color) 2px;
   border-radius: 20px;
   width: 90%;
   height: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+#content table {
+  width: 80%;
+  border: solid var(--accent-color) 2px;
+  border-radius: 10px;
+  padding: 2em 1em;
+  font-weight: 400;
+}
+
+#content table tr td,
+#content table tr th {
+  border: solid rgb(94, 94, 94) 1px;
+  padding: 1em 0.5em;
+  border-radius: 5px;
+}
+
+#content table b {
+  color: var(--accent-color);
+}
+
+#content kbd {
+  width: min-content;
+  border: solid rgb(134, 134, 134) 2px;
+  border-style: outset;
+  background-color: rgb(34, 33, 33);
+  border-radius: 8px;
+  padding: 0.2em 0.7em;
+}
+
+#content p b {
+  color: var(--accent-color);
+  font-weight: 700;
 }
 
 #content p {
   font-weight: 400;
-  text-align: left;
+  font-size: 1.2em;
+  text-align: center;
   width: 100%;
+  line-height: 1.5em;
+}
+
+#content #helpList {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+#helpList > * {
+  border: solid var(--accent-color) 2px;
+  padding: 1em 0;
+  border-radius: 10px;
+  margin: 0.5em 0;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#helpList a {
+  color: var(--accent-color);
 }
 
 #buttons {

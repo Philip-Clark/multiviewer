@@ -39,13 +39,6 @@ export default function FeedBackModal({ children }) {
     <ModalComponent id="feedbackModal" closeModal={closeModal} controllerOpen={feedBackOpen}>
       <div className="feedbackHeader">
         <h1>FeedBack</h1>
-        <a
-          href="https://github.com/Philip-Clark/multiviewer/blob/master/readme.md"
-          target="_blank"
-          rel="noreferrer"
-        >
-          View Docs
-        </a>
       </div>
       <form
         title="feedback"

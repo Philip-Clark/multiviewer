@@ -37,9 +37,12 @@ const localDecks = (storedDecks) => {
 function App() {
   const storedDecks = JSON.parse(localStorage.getItem('decks'));
   const savedDeck = JSON.parse(localStorage.getItem('deck'));
+  const tutorialOnce = JSON.parse(localStorage.getItem('tutorialOnce'));
   const [deck, setDeck] = useState(savedDeck ? savedDeck : 0);
   const [controllerOpen, setControllerOpen] = useState(false);
-  const [gettingStartedModalOpen, setGettingStartedModalOpen] = useState(true);
+  const [gettingStartedModalOpen, setGettingStartedModalOpen] = useState(
+    tutorialOnce ? false : true
+  );
   const [feedBackOpen, setFeedBackOpen] = useState(false);
   const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
 
@@ -81,6 +84,10 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [decks, deck]);
 
+  useEffect(() => {
+    localStorage.setItem('tutorialOnce', JSON.stringify(true));
+  }, [gettingStartedModalOpen]);
+
   const createNewDeck = () => {
     const newDeck = Deck(`Tab ${decks.length + 1}`, []);
     setDecks((prevDecks) => [...prevDecks, newDeck]);
@@ -93,6 +100,7 @@ function App() {
       newDecks.splice(deck, 1);
       return newDecks;
     });
+
     if (decks.length === 1) {
       setDeck(0);
       setDecks([Deck(`Tab 1`, [])]);

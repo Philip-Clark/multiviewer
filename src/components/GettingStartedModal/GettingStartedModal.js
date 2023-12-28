@@ -4,10 +4,11 @@ import ModalComponent from '../modal/ModalComponent';
 import { ViewContext } from '../../App';
 import { useState } from 'react';
 import { step1, step2, step3, step4, step5 } from './steps';
+
 export const GettingStartedModal = () => {
   const [position, setPosition] = useState(0);
   const steps = [step1(), step2(), step3(), step4(), step5()];
-  const { gettingStartedModalOpen } = useContext(ViewContext);
+  const { gettingStartedModalOpen, setGettingStartedModalOpen } = useContext(ViewContext);
 
   const next = () => {
     if (position === steps.length - 1) return;
@@ -19,11 +20,31 @@ export const GettingStartedModal = () => {
   };
 
   const closeModal = () => {
-    return;
+    setGettingStartedModalOpen(false);
   };
   const onAfterOpen = () => {
-    return;
+    setPosition(0);
   };
+
+  const nextButton = (
+    <button className="major" onClick={next}>
+      Next
+    </button>
+  );
+
+  const previousButton = (
+    <button className="minor" onClick={previous}>
+      Previous
+    </button>
+  );
+  const closeButton = (type = 'major') => {
+    return (
+      <button className={type} onClick={closeModal}>
+        Close
+      </button>
+    );
+  };
+
   return (
     <ModalComponent
       controllerOpen={gettingStartedModalOpen}
@@ -36,12 +57,8 @@ export const GettingStartedModal = () => {
         <p>
           {position + 1} of {steps.length}
         </p>
-        <button className="minor" onClick={previous}>
-          Previous
-        </button>
-        <button className="major" onClick={next}>
-          Next
-        </button>
+        {position === 0 ? closeButton('minor') : previousButton}
+        {position === steps.length - 1 ? closeButton('major') : nextButton}
       </div>
     </ModalComponent>
   );

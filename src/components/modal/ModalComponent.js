@@ -19,7 +19,7 @@ const ModalComponent = ({ controllerOpen, closeModal, children, id = '', onAfter
       onRequestClose={closeModal}
       className={'modal'}
       id={id}
-      style={{ overlay: { backgroundColor: 'rgba(0, 0, 0, 0.878)5)' } }}
+      style={{ overlay: { backgroundColor: 'rgba(102, 102, 102, 0.696)5)' } }}
       onAfterOpen={onAfterOpen}
     >
       {children}

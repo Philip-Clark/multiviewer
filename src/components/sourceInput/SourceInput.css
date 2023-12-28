@@ -2,6 +2,7 @@
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr 3fr 0.2fr;
+  height: 30px;
 }
 
 /* .iframe should take 60% of the flex area, .name should take 30% leave 10px gap */
@@ -33,6 +34,7 @@
 .iFrame,
 .name {
   color: rgb(230, 230, 230);
+  height: inherit;
 }
 
 .name {
@@ -61,6 +63,7 @@
   cursor: pointer;
   transition: outline ease 0.2s;
   outline: solid transparent;
+  padding: 0;
 }
 
 .add:focus,
