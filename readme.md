@@ -9,21 +9,21 @@ Mult-i-viewer allows multiple "tabs" which are collections of sources. Each tabs
 
 ## The Need
 
-The project was born from a need I saw while working with a team who needed to monitor 9 live streamed sessions. Initially I built a simple hard coded site for this but knew this was not scalable. In the next few weeks I built Mult-i-viewer.
+The project was born from a need I saw while working with a team that needed to monitor 9 live streamed sessions. Initially, I built a simple hard-coded site for this but knew this was not scalable. In the next few weeks, I built Mult-i-viewer.
 
 ## Keyboard Shortcuts
 
 |     Key     | Action                 |
 | :---------: | :--------------------- |
-| Left Arrow  | Go to the previous tab |
-| Right Arrow | Go to the next tab     |
-| ` ( Tilde ) | Open the settings      |
-|     1-9     | Quick jump to tabs 1-9 |
+| <kbd>Left Arrow</kbd>  | Go to the previous tab |
+| <kbd>Right Arrow</kbd> | Go to the next tab     |
+| <kbd>`</kbd> ( Tilde ) | Open the settings      |
+|     <kbd>1</kbd>-<kbd>9</kbd>     | Quick jump to tabs 1-9 |
 |             |                        |
 
 ## The internal workings
 
-Internally, Mult-i-viewer extracts the scr from the provided embed code and creates a new iframe to hold the source. Preferably one could copy the share url from sources like youtube, however these are not always compatible with iframes. This does mean however that mult-i-viewer does not use the style, surrounding html structure, and other attributes from the original source. If this is something your use case needs, please feel free to submit feedback explaining why and what you would like for mult-i-viewer to use from the original source.
+Internally, Mult-i-viewer extracts the scr from the provided embed code and creates a new iframe to hold the source. Preferably one could copy the share url from sources like YouTube, however these are not always compatible with iframes. This does mean however that mult-i-viewer does not use the style, surrounding html structure, and other attributes from the original source. If this is something your use case needs, please feel free to submit feedback explaining why and what you would like for mult-i-viewer to use from the original source.
 
 ## Notice
 
