@@ -1,7 +1,7 @@
 import React from 'react';
-import hero from '../../assets/gettingStarted/page1/multiviewer.png';
-import addSources from '../../assets/gettingStarted/page1/addSources.gif';
-import manageTabs from '../../assets/gettingStarted/page1/manageTabs.gif';
+import hero from '../../assets/gettingStarted/multiviewer.png';
+import addSources from '../../assets/gettingStarted/addSources.gif';
+import manageTabs from '../../assets/gettingStarted/manageTabs.gif';
 import {
   FaArrowLeft,
   FaArrowRight,
