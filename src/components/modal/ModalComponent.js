@@ -1,6 +1,7 @@
 import ReactModal from 'react-modal';
 import './modalComponent.css';
 import PropTypes from 'prop-types';
+import '../../button.css';
 /**
  * Modal component that displays a modal dialog.
  *
@@ -11,14 +12,14 @@ import PropTypes from 'prop-types';
  * @param {function} [props.onAfterOpen] - Function to be called after the modal has opened.
  * @returns {JSX.Element} The rendered modal component.
  */
-const ModalComponent = ({ controllerOpen, closeModal, children, id, onAfterOpen }) => {
+const ModalComponent = ({ controllerOpen, closeModal, children, id = '', onAfterOpen }) => {
   return (
     <ReactModal
       isOpen={controllerOpen}
       onRequestClose={closeModal}
       className={'modal'}
       id={id}
-      style={{ overlay: { backgroundColor: 'rgba(0, 0, 0, 0.878)5)' } }}
+      style={{ overlay: { backgroundColor: 'rgba(102, 102, 102, 0.696)5)' } }}
       onAfterOpen={onAfterOpen}
     >
       {children}

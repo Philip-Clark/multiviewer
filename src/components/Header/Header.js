@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { FaCog } from 'react-icons/fa';
+import { FaCog, FaQuestion, FaQuestionCircle } from 'react-icons/fa';
 import { MdFeedback } from 'react-icons/md';
 import { ViewContext } from '../../App';
 import ViewSwitcher from '../ViewSwitcher/ViewSwitcher';
@@ -11,16 +11,24 @@ import './Header.css';
  * @returns {JSX.Element} The rendered header component.
  */
 const Header = () => {
-  const { controllerOpen, setControllerOpen, setFeedBackOpen, FeedBackOpen } =
-    useContext(ViewContext);
+  const {
+    controllerOpen,
+    setControllerOpen,
+    setFeedBackOpen,
+    FeedBackOpen,
+    gettingStartedModalOpen,
+    setGettingStartedModalOpen,
+  } = useContext(ViewContext);
 
   const toggleSourceController = () => setControllerOpen(!controllerOpen);
   const toggleFeedBackOpen = () => setFeedBackOpen(!FeedBackOpen);
+  const toggleHelpOpen = () => setGettingStartedModalOpen(!gettingStartedModalOpen);
 
   return (
     <div className="header">
       <div className="viewControls">
         <MdFeedback onClick={toggleFeedBackOpen} />
+        <FaQuestionCircle onClick={toggleHelpOpen} />
       </div>
       <ViewSwitcher />
       <div className="settings">

@@ -5,6 +5,7 @@
  * @returns {JSX.Element} The rendered App component.
  */
 import React, { useEffect, useState } from 'react';
+import ReactJoyride from 'react-joyride';
 import './App.css';
 import Deck from './Deck';
 import View from './View';
@@ -14,6 +15,7 @@ import SourceController from './components/sourceController/sourceController';
 import Welcome from './components/welcomeTile/Welcome';
 import './theme.css';
 import FeedBackModal from './components/FeedBackModal/FeedBackModal';
+import { GettingStartedModal } from './components/GettingStartedModal/GettingStartedModal';
 
 export const ViewContext = React.createContext(null);
 
@@ -35,8 +37,12 @@ const localDecks = (storedDecks) => {
 function App() {
   const storedDecks = JSON.parse(localStorage.getItem('decks'));
   const savedDeck = JSON.parse(localStorage.getItem('deck'));
+  const tutorialOnce = JSON.parse(localStorage.getItem('tutorialOnce'));
   const [deck, setDeck] = useState(savedDeck ? savedDeck : 0);
   const [controllerOpen, setControllerOpen] = useState(false);
+  const [gettingStartedModalOpen, setGettingStartedModalOpen] = useState(
+    tutorialOnce ? false : true
+  );
   const [feedBackOpen, setFeedBackOpen] = useState(false);
   const [decks, setDecks] = useState(storedDecks ? localDecks(storedDecks) : [Deck('Welcome', [])]);
 
@@ -78,6 +84,10 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [decks, deck]);
 
+  useEffect(() => {
+    localStorage.setItem('tutorialOnce', JSON.stringify(true));
+  }, [gettingStartedModalOpen]);
+
   const createNewDeck = () => {
     const newDeck = Deck(`Tab ${decks.length + 1}`, []);
     setDecks((prevDecks) => [...prevDecks, newDeck]);
@@ -90,6 +100,7 @@ function App() {
       newDecks.splice(deck, 1);
       return newDecks;
     });
+
     if (decks.length === 1) {
       setDeck(0);
       setDecks([Deck(`Tab 1`, [])]);
@@ -110,9 +121,14 @@ function App() {
           setFeedBackOpen,
           createNewDeck,
           deleteDeck,
+          gettingStartedModalOpen,
+          setGettingStartedModalOpen,
         }}
       >
         <Header />
+
+        <GettingStartedModal />
+
         <div className="grid">
           {decks[deck].getViews().length > 0 ? (
             decks[deck].getViews().map((view, index) => {

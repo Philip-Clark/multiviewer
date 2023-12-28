@@ -39,7 +39,7 @@
 }
 .TabButton {
   position: relative;
-  min-width: 90px;
+  width: 90px;
   border-radius: 10px;
   text-overflow: ellipsis;
   background-color: transparent;
@@ -68,12 +68,12 @@
 }
 
 #optionsModal.modal {
-  height: 200px;
-  width: 300px;
+  height: fit-content;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
+  padding: 2em 1em;
   margin: 0;
 }
 
@@ -84,6 +84,7 @@
   justify-content: space-evenly;
   padding: 1em;
   align-items: center;
+  gap: 20px;
 }
 
 #optionsModal > form > section {
@@ -102,6 +103,7 @@
   box-sizing: border-box;
   transition: outline ease 0.2s;
   outline: solid transparent;
+  height: 100% !important;
 }
 
 #optionsModal > form > input:focus {
@@ -110,7 +112,7 @@
 
 .TabButton.selected {
   opacity: 1;
-  width: fit-content;
+  width: max-content;
   background-color: #515151;
 }
 
