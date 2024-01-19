@@ -10,7 +10,9 @@ import '../../button.css';
  * @param {ReactNode} props.children - The content to be displayed inside the modal.
  * @param {string} [props.id] - The id of the modal.
  * @param {function} [props.onAfterOpen] - Function to be called after the modal has opened.
+ * @param {React.Ref} [props.wrapperRef] - The ref to the modal.
  * @returns {JSX.Element} The rendered modal component.
+ *
  */
 const ModalComponent = ({ controllerOpen, closeModal, children, id = '', onAfterOpen }) => {
   return (

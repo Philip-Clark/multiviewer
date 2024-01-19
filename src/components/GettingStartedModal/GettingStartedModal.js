@@ -1,14 +1,20 @@
 import './gettingStartedModal.css';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ModalComponent from '../modal/ModalComponent';
 import { ViewContext } from '../../App';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { step1, step2, step3, step4, step5 } from './steps';
 
 export const GettingStartedModal = () => {
   const [position, setPosition] = useState(0);
   const steps = [step1(), step2(), step3(), step4(), step5()];
   const { gettingStartedModalOpen, setGettingStartedModalOpen } = useContext(ViewContext);
+
+  useEffect(() => {
+    const modal = document.getElementById('GettingStartedModal');
+    if (!modal) return;
+    modal.scrollTo(0, 0);
+  }, [position]);
 
   const next = () => {
     if (position === steps.length - 1) return;

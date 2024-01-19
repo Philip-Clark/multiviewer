@@ -42,8 +42,10 @@ const SourceController = () => {
     decks[deck].removeView(id);
     setChangedViews(changedViews + 1);
   };
-  const openOptions = () => {
-    setName(decks[deck].getName());
+  const openOptions = (e, deckName = null) => {
+    console.log(deckName);
+    if (!deckName) setName(decks[deck].getName());
+    else setName(deckName);
     setOptionsOpen(true);
   };
   const changeName = (e) => {
@@ -87,8 +89,11 @@ const SourceController = () => {
   };
 
   const onClickNewDeck = () => {
-    setName(createNewDeck().getName());
-    openOptions();
+    const newDeck = createNewDeck();
+    setName(newDeck.getName());
+    console.log(newDeck.getName());
+    console.log(name);
+    openOptions(null, newDeck.getName());
   };
 
   return (

@@ -17,4 +17,23 @@
   align-items: stretch;
   padding-bottom: 0px;
   justify-content: space-between;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scroll-behavior: smooth;
+}
+
+.modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 10px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
 }
